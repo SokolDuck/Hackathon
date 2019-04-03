@@ -46,3 +46,4 @@ class Note(models.Model):
     fuel_type = models.CharField(verbose_name="Fuel's type", max_length=30)
     car = models.ForeignKey(Car, on_delete=models.CASCADE, verbose_name='Car',
                             related_name='notes')
+
