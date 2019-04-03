@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+        Hello, {{ user.username }}
+    {% endif %}
+    <div class="container">
+        <form action="/auth/login/" method="post">
+            {% csrf_token %}
+            <label for="username">Username</label>
+            <input type="text" name="username">
+            <br><br>
+            <label for="password">Password</label>
+            <input type="password" name="password">
+            <br><br>
+            {% if login_error %}
+                {{ login_error }}
+            {% endif %}
+            <br><br>
+            <button type="submit">Sign in</button>
+        </form>
+
+    </div>
+
+</body>
+</html>

@@ -1,5 +1,3 @@
-Hackathon/settings.py
+./Hackathon/settings.py
 .idea/*
 ./venv/*
-
-__pycache__/
