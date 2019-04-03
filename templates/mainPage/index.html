@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+    <div>
+        <a class="waves-effect waves-light btn" href="{% url 'login' %}">login</a>
+    </div>
+{% endblock body %}
+
+{% block script %}
+{% endblock script %}
+
+{% block at_start %}
+    $('select').formSelect();
+{% endblock at_start %}

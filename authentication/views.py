@@ -52,10 +52,10 @@ class LoginView(views.View):
             print(user)
             if username == 'admin':
                 print(1)
-                return redirect('/admin')
+                return redirect('/admin/')
             else:
                 print(2)
-                return redirect('/auth/login/')
+                return redirect('login')
 
         else:
             args['login_error'] = 'User not found'
@@ -66,4 +66,4 @@ class LoginView(views.View):
 class LogoutView(views.View):
     def get(self, request):
         auth.logout(request)
-        return redirect('/auth/login/')
+        return redirect('logout')
