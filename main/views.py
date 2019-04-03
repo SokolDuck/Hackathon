@@ -20,14 +20,15 @@ class IndexView(View):
 
     def post(self, request, **kwargs):
         return redirect(
-            'shop_info',
-            shop_id=request.POST.get("select")
+            'car',
+            pk=request.POST.get("select")
         )
 
 
 class CarView(View):
-    def get(self, request, id):
-        object = Car.objects.filter(id=id).first()
+    def get(self, request, pk):
+        # object = Car.objects.filter(id=pk).first()
+        object = Note.objects.filter(car_id=pk).all()
 
         return render(request, 'journal/jornal.html', {'records': object})
 
