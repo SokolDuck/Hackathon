@@ -8,11 +8,12 @@ from main.models import Car
 
 class IndexView(View):
     def get(self, request, **kwargs):
-        if request.user is None:
+        if request.user is not None:
             if request.user.is_authenticated:
                 cars = Car.objects.filter(user=request.user).all()
-                return render(request, 'mainPage/index.html', context={'login': True, 'cars': cars})
-        return render(request, 'mainPage/index.html', context={'login': False})
+                print(cars)
+                return render(request, 'mainPage/index.html', context={'login': False, 'cars': cars})
+        return render(request, 'mainPage/index.html', context={'login': True})
 
     def post(self, request, **kwargs):
         return redirect(

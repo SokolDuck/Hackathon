@@ -15,8 +15,8 @@
                                 <option value="" disabled selected>Выберете
                                     автомобиль
                                 </option>
-                                {% for car in cars %}
-                                    <option value="{% url 'car' pk=car.id %}">{{ car.name.title }}</option>
+                                {% for car in cars.all %}
+                                    <option value="{{ car.id }}">{{ car.name.title }}</option>
                                 {% endfor %}
                             </select>
                         </div>

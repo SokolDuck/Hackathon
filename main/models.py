@@ -13,18 +13,20 @@ class Car(models.Model):
         return self.name
 
     name = models.CharField(max_length=30, verbose_name='Name')
-    manufacturer = models.CharField(max_length=50, verbose_name='Manufacturer')
-    model = models.CharField(max_length=30, verbose_name='Model')
+    manufacturer = models.CharField(max_length=50, verbose_name='Manufacturer',
+                                    null=True, blank=True)
+    model = models.CharField(max_length=30, verbose_name='Model', null=True, blank=True)
     issue_year = models.PositiveIntegerField(verbose_name='Year of issue',
                                              validators=[
-                                                 MinValueValidator(1990)])
+                                                 MinValueValidator(1990)],
+                                             null=True, blank=True)
     cost = models.FloatField(verbose_name='Cost',
-                             validators=[MinValueValidator(0)])
+                             validators=[MinValueValidator(0)], null=True, blank=True)
     mileage = models.FloatField(verbose_name='Mileage',
-                                validators=[MinValueValidator(0)])
+                                validators=[MinValueValidator(0)], null=True, blank=True)
     registration_number = models.PositiveIntegerField(
-        verbose_name='Registration number')
-    fuel_type = models.CharField(verbose_name="fuel's type", max_length=30)
+        verbose_name='Registration number', null=True, blank=True)
+    fuel_type = models.CharField(verbose_name="fuel's type", max_length=30, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE,
                              verbose_name='owner', related_name='cars')
 
