@@ -1,0 +1,85 @@
+[
+  {
+    "model": "main.Car",
+    "pk": 1,
+    "fields": {
+      "name": "hyandai accent",
+      "manufacturer": "Hyandai",
+      "issue_year": 2018,
+      "cost": 36100,
+      "mileage": 1000,
+      "registration_number": 6302,
+      "fuel_type": "petrol",
+      "user_id": 1
+    }
+  },
+
+  {
+    "model": "main.Car",
+    "pk": 2,
+    "fields": {
+      "name": "wolkswagen gold",
+      "manufacturer": "Wolkswagen",
+      "issue_year": 1998,
+      "cost": 32000,
+      "mileage": 1700,
+      "registration_number": 7777,
+      "fuel_type": "petrol",
+      "user_id": 2
+    }
+  },
+
+  {
+    "model": "main.Car",
+    "pk": 3,
+    "fields": {
+      "name": "bmw x3",
+      "manufacturer": "BMW",
+      "issue_year": 2009,
+      "cost": 10000,
+      "mileage": 10000,
+      "registration_number": 7977,
+      "fuel_type": "petrol",
+      "user_id": 1
+    }
+  },
+
+  {
+    "model": "main.Note",
+    "pk": 1,
+    "fields": {
+      "odometer": 4950,
+      "fuel_volume": 30,
+      "cost": 47.700,
+      "date": "2018-02-02",
+      "fuel_type": "A-95",
+      "car_id": 1
+    }
+  },
+
+  {
+    "model": "main.Note",
+    "pk": 2,
+    "fields": {
+      "odometer": 3550,
+      "fuel_volume": 15,
+      "cost": 30.560,
+      "date": "2018-07-03",
+      "fuel_type": "A-95",
+      "car_id": 2
+    }
+  },
+
+  {
+    "model": "main.Note",
+    "pk": 3,
+    "fields": {
+      "odometer": 3000,
+      "fuel_volume": 18,
+      "cost": 38.560,
+      "date": "2018-02-09",
+      "fuel_type": "A-92",
+      "car_id": 3
+    }
+  }
+]
