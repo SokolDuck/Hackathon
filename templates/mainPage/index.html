@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+      <div>
+        <form method="post">
+          {% csrf_token %}
+          <div class="row ">
+            <div class="input-field col s3 offset-s3">
+              <select id="select" name="select">
+                <option value="" disabled selected>Выбирете автомобиль</option>
+                {% for car in cars %}
+                <option value="#">{{ car.name.title }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col s3">
+              <button type="submit" class="btn" style="margin-top: 10%">Открыть</button>
+            </div>
+          </div>
+        </form>
+      </div>
+{% endblock body %}
+
+{% block script %}
+{% endblock script %}
+
+{% block at_start %}
+   $('select').formSelect();
+{% endblock at_start %}
