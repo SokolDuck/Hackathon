@@ -3,7 +3,32 @@
 
 {% block body %}
     <div>
-        <a class="waves-effect waves-light btn" href="{% url 'login' %}">login</a>
+        {% if login %}
+            <a class="waves-effect waves-light btn" href="{% url 'login' %}">login</a>
+        {% else %}
+            <div>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row ">
+                        <div class="input-field col s3 offset-s3">
+                            <select id="select" name="select">
+                                <option value="" disabled selected>Выберете
+                                    автомобиль
+                                </option>
+                                {% for car in cars %}
+                                    <option value="{% url 'car' pk=car.id %}">{{ car.name.title }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col s3">
+                            <button type="submit" class="btn"
+                                    style="margin-top: 10%">Открыть
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        {% endif %}
     </div>
 {% endblock body %}
 
