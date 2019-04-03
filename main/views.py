@@ -1,10 +1,11 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 
 # Create your views here.
 from django.views import View
 from .models import Car, Note
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView, DeleteView
 
 from main.models import Car
 
@@ -25,25 +26,43 @@ class IndexView(View):
         )
 
 
-class CarView(View):
+class CarView(LoginRequiredMixin, View):
     def get(self, request, pk):
-        # object = Car.objects.filter(id=pk).first()
-        object = Note.objects.filter(car_id=pk).all()
+        car = Car.objects.filter(id=pk).first()
+        notes = Note.objects.filter(car_id=pk).all()
 
-        return render(request, 'journal/jornal.html', {'records': object})
+        return render(request, 'journal/jornal.html', {'records': notes, 'car': car})
 
 
-class CarCreateView(CreateView):
+class CarCreateView(LoginRequiredMixin, CreateView):
     model = Car
     fields = ['name', 'manufacturer', 'model', 'issue_year', 'cost', 'mileage', 'registration_number',
               'fuel_type']
     template_name = 'create_car.html'
 
     def form_valid(self, form):
-        self.object = Car(user_id=self.kwargs['user'], **form.cleaned_data)
+        self.object = Car(user_id=self.request.user.id, **form.cleaned_data)
         self.object.save()
 
         return redirect(self.get_success_url())
 
     def get_success_url(self):
-        return reverse_lazy('car', args=[self.object.user_id])
+        return reverse_lazy('index')
+
+
+class CarUpdateView(LoginRequiredMixin, UpdateView):
+    model = Car
+    fields = ['name', 'manufacturer', 'model', 'issue_year', 'cost', 'mileage', 'registration_number',
+              'fuel_type']
+    template_name = 'update_car.html'
+
+    def get_success_url(self, **kwargs):
+        return reverse_lazy('car', args=[self.object.id])
+
+
+class CarDeleteView(LoginRequiredMixin, DeleteView):
+    model = Car
+    template_name = 'delete_car.html'
+
+    def get_success_url(self):
+        return reverse_lazy('index')

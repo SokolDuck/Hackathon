@@ -64,7 +64,7 @@
     <nav style="background-color: #009688">
         <div class="nav-wrapper">
             <a href="{% url 'index' %}" class="brand-logo"
-               style="margin-left: 20px;">что-то там</a>
+               style="margin-left: 20px;">Driver's personal payment history</a></a>
 
             <ul id="nav-mobile" class="right hide-on-med-and-down">
 
@@ -81,15 +81,24 @@
                 </li>
 
                 <li><a class="modal-trigger" href="#modal1">О сайте</a></li>
+                {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}">Log out({{ user.username }})</a></li>
+
+                {% else %}
                 <li><a href="{% url 'login' %}">Login</a></li>
-                <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% endif %}
             </ul>
         </div>
     </nav>
-    <div class="container">
-        {% block body %}
-        {% endblock %}
-    </div>
+        <div class="container">
+            {% block body %}
+            {% endblock %}
+        </div>
+    {% if user.is_authenticated %}
+        <a href="{% url 'create_car' %}" class="waves-effect waves-light btn">Add new car</a>
+    {% else %}
+        <h1>You shall not pass!!!!</h1>
+    {% endif %}
     </body>
 </main>
 </html>
