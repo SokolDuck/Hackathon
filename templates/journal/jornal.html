@@ -41,8 +41,8 @@
                             <p>Date: {{ item.date }}</p>
                         </div>
                         <div class="card-action">
-                            <a href="#">Редактировать</a>
-                            <a href="#">Удалить</a>
+                            <a href="{% url 'update_note' pk=item.id car_id=car.id %}">Редактировать</a>
+                            <a href="{% url 'delete_note' pk=item.id car_id=car.id%}">Удалить</a>
                         </div>
                     </div>
                 </div>
