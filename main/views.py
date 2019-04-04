@@ -65,3 +65,36 @@ class CarDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('index')
+
+
+class NoteCreateView(LoginRequiredMixin, CreateView):
+    model = Note
+    fields = ["odometer", "fuel_volume", "cost", "date", "fuel_type"]
+    template_name = 'create_note.html'
+
+    def form_valid(self, form):
+        print(self.kwargs)
+        self.object = Note(car_id=self.kwargs["pk"], **form.cleaned_data)
+        self.object.save()
+
+        return redirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse_lazy('car', args=[self.kwargs["pk"]])
+
+
+class NoteUpdateView(LoginRequiredMixin, UpdateView):
+    model = Note
+    fields = ["odometer", "fuel_volume", "cost", "date", "fuel_type"]
+    template_name = 'update_note.html'
+
+    def get_success_url(self, **kwargs):
+        return reverse_lazy('car', args=[self.kwargs["car_id"]])
+
+
+class NoteDeleteView(LoginRequiredMixin, DeleteView):
+    model = Note
+    template_name = 'delete_note.html'
+
+    def get_success_url(self):
+        return reverse_lazy('car', args=[self.kwargs["car_id"]])
