@@ -32,7 +32,10 @@ class RegisterView(views.View):
 
 class LoginView(views.View):
     def get(self, request):
-        return render(request, 'login.html')
+        if request.user.is_authenticated:
+            return redirect('/')
+        else:
+            return render(request, 'login.html')
 
     def post(self, request):
         args = {}

@@ -1,50 +1,53 @@
 {% load main_extras %}
 
-
-<form method="post">
-    {% csrf_token %}
-    {% for field in form %}
-        {% if field|is_mult_choice %}
-            {% if field.errors %}
-                {% for error in field.errors %}
-                    <div class="error">
-                        {{ error }}
+<div class="row">
+<div class="col s6" style="margin-top: 20px">
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            {% if field|is_mult_choice %}
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        <div class="error">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                {% for item in field.subwidgets %}
+                    <div name="change">
+                        {{ item }}
                     </div>
                 {% endfor %}
-            {% endif %}
-            {% for item in field.subwidgets %}
-                <div name="change">
-                    {{ item }}
-                </div>
-            {% endfor %}
 
-        {% else %}
-            {% if field|is_checkbox %}
-                <div name="change">
-                    {{ field }}
-                </div>
             {% else %}
-                <div class="form-group">
-                    {{ field.label_tag }}
-                    {% if form.is_bound %}
-                        {% if field.errors %}
-                            {% for error in field.errors %}
-                                <div class="error">
-                                    {{ error }}
-                                </div>
-                            {% endfor %}
-                            {{ field }}
+                {% if field|is_checkbox %}
+                    <div name="change">
+                        {{ field }}
+                    </div>
+                {% else %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+                        {% if form.is_bound %}
+                            {% if field.errors %}
+                                {% for error in field.errors %}
+                                    <div class="error">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                                {{ field }}
+                            {% else %}
+                                {{ field }}
+                            {% endif %}
                         {% else %}
                             {{ field }}
                         {% endif %}
-                    {% else %}
-                        {{ field }}
-                    {% endif %}
-                </div>
+                    </div>
+                {% endif %}
             {% endif %}
-        {% endif %}
-    {% endfor %}
-    <input class="waves-effect waves-light btn" type="submit"
-           style="margin-top: 20px;"
-           value="{{ button_label }}">
-</form>
+        {% endfor %}
+        <input class="waves-effect waves-light btn" type="submit"
+               style="margin-top: 20px; left: 50%; margin-right: -50%; transform: translate(-50%, 10%);"
+               value="{{ button_label }}">
+    </form>
+</div>
+</div>
