@@ -27,7 +27,11 @@
 
     <link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}">
 
-
+    <style>
+        .dropdown-marging {
+            top: 100% !important;
+        }
+    </style>
     {% block style %}
     {% endblock style %}
 </head>
@@ -65,9 +69,9 @@
         <div class="nav-wrapper">
             <a href="{% url 'index' %}" class="brand-logo"
                style="margin-left: 20px;">Driver's personal payment history :
-            {% if request.user.is_authenticated %}
-                {{ user.username }}
-            {% endif %}
+                {% if request.user.is_authenticated %}
+                    {{ user.username }}
+                {% endif %}
             </a>
 
             <ul id="nav-mobile" class="right hide-on-med-and-down">
