@@ -15,7 +15,6 @@ class IndexView(View):
         if request.user is not None:
             if request.user.is_authenticated:
                 cars = Car.objects.filter(user=request.user).all()
-                print(cars)
                 return render(request, 'mainPage/index.html', context={'login': False, 'cars': cars})
         return render(request, 'mainPage/index.html', context={'login': True})
 

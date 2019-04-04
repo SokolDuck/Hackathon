@@ -56,8 +56,8 @@
 
     <!-- Dropdown Structure -->
     <ul id="dropdown3" class="dropdown-content dropdown-marging">
-        {% for car in cars %}
-            <li><a href="#">{{ car.name }}</a></li>
+        {% for car in CARS %}
+            <li><a href="{% url 'car' pk=car.id %}">{{ car.name }}</a></li>
         {% endfor %}
     </ul>
 
@@ -86,7 +86,7 @@
 
                 <li><a class="modal-trigger" href="#modal1">О сайте</a></li>
                 {% if request.user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}">Log out({{ user.username }})</a>
+                    <li><a href="{% url 'logout' %}">Log out</a>
                     </li>
 
                 {% else %}
